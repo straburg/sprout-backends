@@ -15,8 +15,8 @@ describe('test All endpoint response', function () {
 
     describe('test all auth routes', function () {
         let newuser = {
-            "firstName": "firstname",
-            "lastName": "lastname",
+            "firstname": "firstname",
+            "lastname": "lastname",
             "gender": "male",
             "email": "domrand9@gmail.com",
             "country": "testaddress",
@@ -28,8 +28,8 @@ describe('test All endpoint response', function () {
         }
 
         let wrongEmail = {
-            "firstName": "firstname",
-            "lastName": "lastname",
+            "firstname": "firstname",
+            "lastname": "lastname",
             "gender": "male",
             "email": "domrand9@com",
             "country": "testaddress",
@@ -41,8 +41,8 @@ describe('test All endpoint response', function () {
         }
 
         let wrongSignupData = {
-            "firstName": "",
-            "lastName": "lastname",
+            "firstname": "",
+            "lastname": "lastname",
             "gender": "male",
             "email": "domrand9@gmail.com",
             "country": "testaddress",

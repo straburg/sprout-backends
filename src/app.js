@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import routes from "./routes";
+import cors from "cors";
 require('dotenv').config();
 
 const port = process.env.PORT || 3000;
@@ -8,6 +9,8 @@ const app = express();
 const prefix = "/api/v1";
 
 routes(prefix, app);
+
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
