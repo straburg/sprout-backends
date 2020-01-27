@@ -1,0 +1,39 @@
+{
+  "name": "astud_backed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "export DB_DATABASE=sprout-test && export NODE_ENV=test && mocha --exit",
+    "start": "node start.js",
+    "dev": "nodemom start.js"
+  },
+  "author": "bidemi oritunmise peter",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "babel-polyfill": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^6.2.2",
+    "moment": "^2.24.0",
+    "mysql2": "^1.7.0",
+    "nodemailer": "^6.3.0",
+    "pg": "^7.17.0",
+    "sequelize": "^5.19.4",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "sequelize-cli": "^5.5.1",
+    "nodemon": "^1.19.3"
+  }
+}

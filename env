@@ -1,0 +1,7 @@
+NODE_ENV=development
+DB_HOST=localhost
+DB_DATABASE=sprout-data
+DB_USER=coolbop
+DB_PASSWORD=2433_B_New/P
+DB_PORT=5432
+DB_SSL=0
