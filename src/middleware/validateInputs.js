@@ -3,7 +3,7 @@ import { errorResponse } from "../helpers";
 
 module.exports = {
     validateInputs : (req, res, next) => {
-        const { firstName,lastName,gender,country,address,occupation,status,email,password } = req.body;
+        const { firstName,lastName,gender,country,address,occupation,status,email,password,phone } = req.body;
 
         let error;
         error = firstName.trim().length === 0 ? "Firstname is required" : error ;
@@ -14,7 +14,8 @@ module.exports = {
         error = occupation.trim().length === 0 ? "Occupation is required" : error;
         error = status.trim().length === 0 ? "Status is required" : error;
         error = email.trim().length === 0 ? "Email is reqiured" : error;
-        error = password.length === 0 ? "Password is required" : error;
+        error = password.length === 0 ? "Password should be 6 character or longer" : error;
+        error = phone.length < 9 ? "Invalid phone number" : error;
         error ? res.status(400).send(errorResponse(error)):  next();
     },
     validateLoginInput : (req, res, next) => {

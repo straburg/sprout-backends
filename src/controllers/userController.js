@@ -9,15 +9,16 @@ module.exports = {
         res.status(200).send(successResponse("welcome to scrib server"))
     },
     signup: (req, res) => {
-        const { name,gender,country,address,occupation,status,email,password } = req.body;
+        const { name,gender,country,address,occupation,status,email,password,phone } = req.body;
         async function sendToDb() {
             try {
 
-                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password, created_at) values ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *";
-                let queryParams = [name, gender, country, address,occupation,status, email, password, today(0, true)];
+                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password, created_at, phone) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *";
+                let queryParams = [name, gender, country, address,occupation,status, email, password, today(0, true),phone];
                 let result = await dbServices(preparedQuery, queryParams);
                 result = result[0];
                 result.token = jwt.sign({ user: result }, "ourlittlesecret", {});
+                //console.log(result);
                 res.status(201).send(successResponse("Account created successfully", result));
             } catch (e) {
                 res.status(406).send(errorResponse(e));

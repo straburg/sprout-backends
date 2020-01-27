@@ -23,7 +23,8 @@ describe('test All endpoint response', function () {
             "address": "myaddrress",
             "occupation": "student",
             "status": "single",
-            "password": "thepassword"
+            "password": "thepassword",
+            "phone": "555356565636"
         }
 
         let wrongEmail = {
@@ -35,7 +36,8 @@ describe('test All endpoint response', function () {
             "address": "myaddrress",
             "occupation": "student",
             "status": "single",
-            "password": "thepassword"
+            "password": "thepassword",
+            "phone": "555356565636"
         }
 
         let wrongSignupData = {
@@ -47,7 +49,8 @@ describe('test All endpoint response', function () {
             "address": "myaddrress",
             "occupation": "student",
             "status": "single",
-            "password": "thepassword"
+            "password": "thepassword",
+            "phone": "555356565636"
         }
         let loginData = {
             "email": "domrand9@gmail.com",
