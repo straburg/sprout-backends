@@ -9,12 +9,13 @@ module.exports = {
         res.status(200).send(successResponse("welcome to scrib server"))
     },
     signup: (req, res) => {
-        const { name,gender,country,address,occupation,status,email,password,phone } = req.body;
+        const { name,gender,country,address,occupation,status,email,password,phone,username } = req.body;
+        let arr = Math.floor(1000000000 + Math.random() * 9000000000);
         async function sendToDb() {
             try {
 
-                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password, created_at, phone) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *";
-                let queryParams = [name, gender, country, address,occupation,status, email, password, today(0, true),phone];
+                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password, created_at, phone, acctnumber, username) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *";
+                let queryParams = [name, gender, country, address,occupation,status, email, password, today(0, true),phone,arr,username];
                 let result = await dbServices(preparedQuery, queryParams);
                 result = result[0];
                 result.token = jwt.sign({ user: result }, "ourlittlesecret", {});
@@ -41,11 +42,26 @@ module.exports = {
         }
         validateUniqueEmail();
     },
+    validateUsername: (req, res, next) => {
+        const { username, userid } = req.body;
+        async function validateUniqueEmail() {
+            try {
+                let preparedQuery = "select * from users where CASE WHEN $1::varchar IS NOT NULL THEN username = $1 ELSE 1=1 END  and CASE "
+                    + " WHEN $2::int IS NOT NULL THEN id <> $2 ELSE 1=1 END";
+                let queryParams = [username, userid];
+                let emailValid = await availableEmail(preparedQuery, queryParams);
+                next();
+            } catch (e) {
+                res.status(400).send(errorResponse(e));
+            }
+        }
+        validateUniqueEmail();
+    },
     login: (req, res, next) => {
         const { email, password } = req.body;
         async function loginUser() {
             try {
-                let preparedQuery = "select * from users where email = $1";
+                let preparedQuery = "select * from users where email = $1 or username = $1";
                 let queryParams = [email];
                 let result = await verifyEmail(preparedQuery, queryParams);
                 result = result[0];
@@ -68,9 +84,10 @@ module.exports = {
     },
     createToken: (req, res) => {
         const { resultData } = req;
-        let token = jwt.sign({ user: resultData }, "ourlittlesecret", {});
-        token ?
-            res.status(200).send(successResponse("Login successful", token))
+        resultData.token = jwt.sign({ user: resultData }, "ourlittlesecret", {});
+        //console.log(resultData);
+        resultData.token ?
+            res.status(200).send(successResponse("Login successful", resultData))
             :
             res.status(401).send(errorResponse("Unauthorized"));
     },

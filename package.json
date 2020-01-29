@@ -6,7 +6,7 @@
   "scripts": {
     "test": "export DB_DATABASE=sprout-test && export NODE_ENV=test && mocha --exit",
     "start": "node start.js",
-    "dev": "nodemom start.js"
+    "dev": "export DB_DATABASE=sprout-data && export NODE_ENV=developer && node start.js"
   },
   "author": "bidemi oritunmise peter",
   "license": "ISC",
