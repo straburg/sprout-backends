@@ -16,8 +16,8 @@ module.exports = {
         async function sendToDb() {
             try {
 
-                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password, idcard, created_at, phone, acctnumber, username,bank) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *";
-                let queryParams = [name, gender, country, address,occupation,status, email, password,idcard, today(0, true),phone,arr,username,bank];
+                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password,balance, idcard, created_at, phone, acctnumber, username,bank) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *";
+                let queryParams = [name, gender, country, address,occupation,status, email, password, 0,idcard, today(0, true),phone,arr,username,bank];
                 let result = await dbServices(preparedQuery, queryParams);
                 result = result[0];
                 result.token = jwt.sign({ user: result }, "ourlittlesecret", {});
@@ -34,7 +34,6 @@ module.exports = {
         sendToDb()
     },
     sendEmail: (req, res, next) => {
-        console.log("sendEmail");
         const { email, name } = req.body;
         const { acct, newDetails, bankName } = req;
         async function sendmail() {
@@ -46,8 +45,10 @@ module.exports = {
 					html: `<h3>Welcome ${name}</h3><p>Account Number: ${acct}</p>`
 				};
                 let successfull = await sendingMail(mailOptions);
+                console.log("sendEmail");
                 res.status(201).send(successResponse("Account created successfully", newDetails));
 			} catch (err) {
+                console.log(err);
                 res.status(201).send(successResponse("Account created successfully", newDetails));
 			}
 		}
