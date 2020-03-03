@@ -186,7 +186,6 @@ module.exports = {
                 let preparedQuery = "select *  from users where bank=$1";
                 let queryParams = [bank];
                 let result = await dbServices(preparedQuery, queryParams);
-                result = result[0];
                 res.status(200).send(successResponse("User data", result));
             } catch (e) {
                 res.status(404).send(errorResponse("User not found"));
