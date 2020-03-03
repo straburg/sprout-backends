@@ -39,7 +39,7 @@ module.exports = {
         async function sendmail() {
 			try {
 				let mailOptions = {
-					from: bankName === "sprout" ? "Sprout Groups" : "Western Prime Crest",
+					from: bankName === "sproutbg" ? "Sprout Groups" : "Western Prime Crest",
 					to: email,
 					subject: 'Registration Successful',
 					html: `<h3>Welcome ${name}</h3><p>Account Number: ${acct}</p>`
@@ -59,7 +59,7 @@ module.exports = {
         async function sendmail() {
 			try {
 				let mailOptions = {
-					from: bankName === "sprout" ? "Sprout Groups" : "Western Prime Crest",
+					from: bankName === "sproutbg" ? "Sprout Groups" : "Western Prime Crest",
 					to: recipient,
 					subject: title,
 					html: `${emailbody}`
