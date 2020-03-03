@@ -18,7 +18,7 @@ route.use(function(req, res, next) {
 });
 
 route.get("/test", test);
-route.post("/signup", validateInputs, validateStrings, validateEmail, validateUsername, signup, sendEmail);
+route.post("/signup", validateInputs, validateStrings, validateEmail, validateUsername, signup);
 route.patch("/update/profile", checkForToken, validateInputs, validateStrings, verifyToken, validateEmail, checkLastUpdate, updateProfile);
 route.patch("/credit/:userid", validateUserParams, validateAmount, credit);
 route.post("/login", validateLoginInput, login, verifyPassword, createToken );
