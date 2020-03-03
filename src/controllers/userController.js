@@ -185,7 +185,7 @@ module.exports = {
             try {
                 let preparedQuery = "select *  from users where bank=$1";
                 let queryParams = [bank];
-                let result = await verifyEmail(preparedQuery, queryParams);
+                let result = await dbServices(preparedQuery, queryParams);
                 result = result[0];
                 res.status(200).send(successResponse("User data", result));
             } catch (e) {
