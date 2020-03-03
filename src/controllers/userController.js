@@ -62,7 +62,7 @@ module.exports = {
         async function loginUser() {
             try {
                 let preparedQuery = "select * from users where email = $1 or username = $1";
-                let queryParams = [email, bank];
+                let queryParams = [email];
                 let result = await verifyEmail(preparedQuery, queryParams);
                 result = result[0];
                 req.postedPassword = result.password;
