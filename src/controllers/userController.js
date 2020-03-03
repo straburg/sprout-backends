@@ -16,7 +16,7 @@ module.exports = {
         async function sendToDb() {
             try {
 
-                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password,balance, idcard, created_at, phone, acctnumber, username,bank) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *";
+                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password,balance, idcard, created_at, phone, acctnumber, username,bank) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *";
                 let queryParams = [name, gender, country, address,occupation,status, email, password, 0,idcard, today(0, true),phone,arr,username,bank];
                 let result = await dbServices(preparedQuery, queryParams);
                 result = result[0];
