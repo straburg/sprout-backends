@@ -21,7 +21,7 @@ module.exports = {
         error ? res.status(400).send(errorResponse(error)):  next();
     },
     validateEmailInputs : (req, res, next) => {
-        console.log("validateEmailInputs,");
+        console.log("validateEmailInputs");
         const { recipient, title} = req.body;
 
         let error;
