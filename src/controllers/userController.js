@@ -36,7 +36,7 @@ module.exports = {
     sendEmail: (req, res, next) => {
         console.log("sendEmail");
         const { email, name } = req.body;
-        const { acct, newdetails, bankName } = req;
+        const { acct, newDetails, bankName } = req;
         async function sendmail() {
 			try {
 				let mailOptions = {
@@ -46,9 +46,9 @@ module.exports = {
 					html: `<h3>Welcome ${name}</h3><p>Account Number: ${acct}</p>`
 				};
                 let successfull = await sendingMail(mailOptions);
-                res.status(201).send(successResponse("Account created successfully", newdetails));
+                res.status(201).send(successResponse("Account created successfully", newDetails));
 			} catch (err) {
-                res.status(201).send(successResponse("Account created successfully", newdetails));
+                res.status(201).send(successResponse("Account created successfully", newDetails));
 			}
 		}
 		sendmail();
