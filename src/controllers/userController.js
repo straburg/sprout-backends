@@ -61,7 +61,7 @@ module.exports = {
         const { email, password, bank } = req.body;
         async function loginUser() {
             try {
-                let preparedQuery = "select * from users where (email = $1 or username = $1) and bank = $2";
+                let preparedQuery = "select * from users where email = $1 or username = $1 and bank = $2";
                 let queryParams = [email, bank];
                 let result = await verifyEmail(preparedQuery, queryParams);
                 result = result[0];
