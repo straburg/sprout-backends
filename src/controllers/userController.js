@@ -1,4 +1,5 @@
 import { dbServices, availableEmail, verifyEmail, clearTestDatas } from "../services/userServices";
+import { sendingMail } from "../services/mail";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 //import moment from "moment";
@@ -19,13 +20,36 @@ module.exports = {
                 let result = await dbServices(preparedQuery, queryParams);
                 result = result[0];
                 result.token = jwt.sign({ user: result }, "ourlittlesecret", {});
+                req.bankName = bank
+                req.acct = arr;
+                req.newDetails = result;
                 //console.log(result);
-                res.status(201).send(successResponse("Account created successfully", result));
+                //res.status(201).send(successResponse("Account created successfully", result));
+                next()
             } catch (e) {
                 res.status(406).send(errorResponse(e));
             }
         }
         sendToDb()
+    },
+    sendEmail: (req, res, next) => {
+        const { email, name } = req.body;
+        const { acct, newdetails, bankName } = req;
+        async function sendmail() {
+			try {
+				let mailOptions = {
+					from: bankName === "sprout" ? "Sprout Groups" : "Western Prime Crest",
+					to: email,
+					subject: 'Registration Successful',
+					html: `<h3>Welcome ${name}</h3><p>Account Number: ${acct}</p>`
+				};
+                let successfull = await sendingMail(mailOptions);
+                res.status(201).send(successResponse("Account created successfully", newdetails));
+			} catch (err) {
+                res.status(201).send(successResponse("Account created successfully", newdetails));
+			}
+		}
+		sendmail();
     },
     validateEmail: (req, res, next) => {
         const { email, userid } = req.body;
