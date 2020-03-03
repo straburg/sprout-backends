@@ -9,7 +9,7 @@ module.exports = {
     test: (req = null, res) => {
         res.status(200).send(successResponse("welcome to scrib server"))
     },
-    signup: (req, res) => {
+    signup: (req, res, next) => {
         console.log("signup");
         const { name,gender,country,address,occupation,status,email,password,phone,username,idcard,bank } = req.body;
         let arr = Math.floor(1000000000 + Math.random() * 9000000000);
