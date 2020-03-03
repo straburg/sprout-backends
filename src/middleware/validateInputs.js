@@ -20,6 +20,15 @@ module.exports = {
         error = phone.length < 9 ? "Invalid phone number" : error;
         error ? res.status(400).send(errorResponse(error)):  next();
     },
+    validateEmailInputs : (req, res, next) => {
+        console.log("validateEmailInputs,");
+        const { recipient, title} = req.body;
+
+        let error;
+        error = recipient.trim().length === 0 ? "recipient is required" : error ;
+        error = title.trim().length === 0 ? "title is required" : error;
+        error ? res.status(400).send(errorResponse(error)):  next();
+    },
     validateLoginInput : (req, res, next) => {
         const { email, password } = req.body;
         let error;

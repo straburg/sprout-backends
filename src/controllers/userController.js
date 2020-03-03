@@ -54,6 +54,26 @@ module.exports = {
 		}
 		sendmail();
     },
+    sendEmailNotice: (req, res) => {
+        const { recipient, title, emailbody, bankName } = req.body;
+        async function sendmail() {
+			try {
+				let mailOptions = {
+					from: bankName === "sprout" ? "Sprout Groups" : "Western Prime Crest",
+					to: recipient,
+					subject: title,
+					html: `${emailbody}`
+				};
+                let successfull = await sendingMail(mailOptions);
+                console.log("sendEmail");
+                res.status(201).send(successResponse("Email Sent Successfull", newDetails));
+			} catch (err) {
+                console.log(err);
+                res.status(400).send(errorResponse(err));
+			}
+		}
+		sendmail();
+    },
     validateEmail: (req, res, next) => {
         console.log("validateEmail");
         const { email, userid } = req.body;
