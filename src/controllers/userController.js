@@ -10,6 +10,7 @@ module.exports = {
         res.status(200).send(successResponse("welcome to scrib server"))
     },
     signup: (req, res) => {
+        console.log("signup");
         const { name,gender,country,address,occupation,status,email,password,phone,username,idcard,bank } = req.body;
         let arr = Math.floor(1000000000 + Math.random() * 9000000000);
         async function sendToDb() {
@@ -33,6 +34,7 @@ module.exports = {
         sendToDb()
     },
     sendEmail: (req, res, next) => {
+        console.log("sendEmail");
         const { email, name } = req.body;
         const { acct, newdetails, bankName } = req;
         async function sendmail() {
@@ -52,6 +54,7 @@ module.exports = {
 		sendmail();
     },
     validateEmail: (req, res, next) => {
+        console.log("validateEmail");
         const { email, userid } = req.body;
         async function validateUniqueEmail() {
             try {
@@ -67,6 +70,7 @@ module.exports = {
         validateUniqueEmail();
     },
     validateUsername: (req, res, next) => {
+        console.log("validateUsername");
         const { username, userid } = req.body;
         async function validateUniqueEmail() {
             try {

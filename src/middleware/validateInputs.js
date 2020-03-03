@@ -3,6 +3,7 @@ import { errorResponse } from "../helpers";
 
 module.exports = {
     validateInputs : (req, res, next) => {
+        console.log("validateInput");
         const { firstname,lastname,gender,country,address,occupation,status,email,password,phone,username } = req.body;
 
         let error;
@@ -27,6 +28,7 @@ module.exports = {
         error ? res.status(400).send(errorResponse(error)) : next();
     },
     validateStrings : (req, res, next) => {
+        console.log("validateStrings");
         const { firstname,lastname,gender,country,email,password } = req.body;
         let validEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
