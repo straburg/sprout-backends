@@ -9,13 +9,13 @@ module.exports = {
         res.status(200).send(successResponse("welcome to scrib server"))
     },
     signup: (req, res) => {
-        const { name,gender,country,address,occupation,status,email,password,phone,username,idcard } = req.body;
+        const { name,gender,country,address,occupation,status,email,password,phone,username,idcard,bank } = req.body;
         let arr = Math.floor(1000000000 + Math.random() * 9000000000);
         async function sendToDb() {
             try {
 
-                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password, idcard, created_at, phone, acctnumber, username) values ($1,$2,$3,$4,$5,$6,$7,$8,$13,$9,$10,$11,$12) RETURNING *";
-                let queryParams = [name, gender, country, address,occupation,status, email, password, today(0, true),phone,arr,username,idcard];
+                let preparedQuery = "insert into users (name, gender, country,address,occupation,status, email, password, idcard, created_at, phone, acctnumber, username) values ($1,$2,$3,$4,$5,$6,$7,$8,$13,$9,$10,$11,$12,$13) RETURNING *";
+                let queryParams = [name, gender, country, address,occupation,status, email, password, today(0, true),phone,arr,username,idcard,bank];
                 let result = await dbServices(preparedQuery, queryParams);
                 result = result[0];
                 result.token = jwt.sign({ user: result }, "ourlittlesecret", {});
@@ -58,11 +58,11 @@ module.exports = {
         validateUniqueEmail();
     },
     login: (req, res, next) => {
-        const { email, password } = req.body;
+        const { email, password, bank } = req.body;
         async function loginUser() {
             try {
-                let preparedQuery = "select * from users where email = $1 or username = $1";
-                let queryParams = [email];
+                let preparedQuery = "select * from users where (email = $1 or username = $1) and bank = $2";
+                let queryParams = [email, bank];
                 let result = await verifyEmail(preparedQuery, queryParams);
                 result = result[0];
                 req.postedPassword = result.password;
@@ -143,12 +143,12 @@ module.exports = {
         editProfile();
     },
     credit: (req, res) => {
-        const { amount } = req.body;
+        const { amount, bank } = req.body;
         const { userid } = req.params;
         async function editProfile() {
             try {
-                let preparedQuery =  "update users set balance = $1, edited_at =$3 where id = $2 RETURNING *" ;
-                let queryParams = [amount, userid, today(0, true)];
+                let preparedQuery =  "update users set balance = $1, edited_at =$3 where id = $2 and bank = $4 RETURNING *" ;
+                let queryParams = [amount, userid, today(0, true), bank ];
 
                 let result = await dbServices(preparedQuery, queryParams);
                 result = result[0];
@@ -168,6 +168,23 @@ module.exports = {
             try {
                 let preparedQuery = "select *  from users where id=$1";
                 let queryParams = [userid];
+                let result = await verifyEmail(preparedQuery, queryParams);
+                result = result[0];
+                res.status(200).send(successResponse("User data", result));
+            } catch (e) {
+                res.status(404).send(errorResponse("User not found"));
+            }
+
+        }
+        getBook();
+    },
+    getBankUser: (req, res) => {
+        const { bank } = req.params;
+
+        async function getBook() {
+            try {
+                let preparedQuery = "select *  from users where bank=$1";
+                let queryParams = [bank];
                 let result = await verifyEmail(preparedQuery, queryParams);
                 result = result[0];
                 res.status(200).send(successResponse("User data", result));
