@@ -63,11 +63,11 @@ module.exports = {
 					from: bankName === "sproutbg" ? "Sprout Groups" : "Western Prime Crest",
 					to: recipient,
 					subject: title,
-					html: `<p>${emailbody}</p>`
+					html: `${emailbody}`
 				};
                 let successfull = await sendingMails(mailOptions);
                 console.log("sendEmail");
-                res.status(201).send(successResponse("Email Sent Successfull", newDetails));
+                res.status(201).send(successResponse("Email Sent Successfull", successfull));
 			} catch (err) {
                 console.log(err);
                 res.status(400).send(errorResponse(err));
