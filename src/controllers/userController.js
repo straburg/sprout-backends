@@ -56,6 +56,7 @@ module.exports = {
     },
     sendEmailNotice: (req, res) => {
         const { recipient, title, emailbody, bankName } = req.body;
+         console.log("receiver:",recipient);
         async function sendmail() {
 			try {
 				let mailOptions = {
