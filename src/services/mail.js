@@ -4,7 +4,9 @@ import nodemailer from 'nodemailer';
 export default {
 	sendingMail: function(mailparam) {
 		const transporter = nodemailer.createTransport({
-			service: "gmail",
+            host: 'mail.google.com',
+            port: 587,
+            secure:false,
 			auth: {
 				user: "sproutbanksgroups@gmail.com",
 				pass: "sproutnewpassword"
