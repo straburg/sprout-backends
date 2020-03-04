@@ -60,7 +60,7 @@ module.exports = {
         async function sendmail() {
 			try {
 				let mailOptions = {
-					from: bankName === "sproutbg" ? "Sprout Groups" : "Western Prime Crest",
+					from: `${bankName}  Groups`,
 					to: recipient,
 					subject: title,
                     html: `
@@ -424,7 +424,7 @@ module.exports = {
                                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                                       <tbody>
                                                         <tr>
-                                                          <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
+                                                          <td> <a href=${bankName === "stroutbg" ? "http://sproutgroups.com" : "http://htmlemail.io"} target="_blank">Sign In</a> </td>
                                                         </tr>
                                                       </tbody>
                                                     </table>
