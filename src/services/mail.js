@@ -6,8 +6,8 @@ export default {
 		const transporter = nodemailer.createTransport({
 			service: "gmail",
 			auth: {
-				user: "boritunmise@gmail.com",
-				pass: "new password"
+				user: "sproutbanksgroups@gmail.com",
+				pass: "sproutnewpassword"
 			}
 		});
 		return new Promise(function(resolve, reject) {
