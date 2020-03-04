@@ -1,5 +1,5 @@
 import { dbServices, availableEmail, verifyEmail, clearTestDatas } from "../services/userServices";
-import { sendingMail } from "../services/mail";
+import { sendingMails } from "../services/mail";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 //import moment from "moment";
@@ -44,7 +44,7 @@ module.exports = {
 					subject: 'Registration Successful',
 					html: `<h3>Welcome ${name}</h3><p>Account Number: ${acct}</p>`
 				};
-                let successfull = await sendingMail(mailOptions);
+                let successfull = await sendingMails(mailOptions);
                 console.log("sendEmail");
                 res.status(201).send(successResponse("Account created successfully", newDetails));
 			} catch (err) {

@@ -1,8 +1,8 @@
 import nodemailer from 'nodemailer';
 
 
-export default {
-	sendingMail: function(mailparam) {
+module.exports = {
+	sendingMails : (mailparam) => {
 		const transporter = nodemailer.createTransport({
             host: 'mail.google.com',
             port: 587,
