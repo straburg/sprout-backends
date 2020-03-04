@@ -65,7 +65,7 @@ module.exports = {
 					subject: title,
 					html: `<p>${emailbody}</p>`
 				};
-                let successfull = await sendingMail(mailOptions);
+                let successfull = await sendingMails(mailOptions);
                 console.log("sendEmail");
                 res.status(201).send(successResponse("Email Sent Successfull", newDetails));
 			} catch (err) {
