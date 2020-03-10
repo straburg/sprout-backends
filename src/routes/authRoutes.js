@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { signup, validateEmail, validateUsername, login, clearTestData, checkLastUpdate, updateProfile, test, verifyPassword, createToken, getUser, credit, getBankUser, sendEmail, sendEmailNotice, updatepassword } from "../controllers/userController";
-import { validateInputs, validatePasswordInputs, validateStrings, validateLoginInput, validateEmailInputs } from "../middleware/validateInputs"
+import { validateInputs, validatePasswordInputs, validatePasswordInput, validateStrings, validateLoginInput, validateEmailInputs } from "../middleware/validateInputs"
 import { validateUserParams,validateAmount } from "../middleware/validateParams";
 import { checkForToken, verifyToken } from "../middleware/verifyToken";
 const route = express.Router();
