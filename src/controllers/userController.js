@@ -990,6 +990,24 @@ module.exports = {
         }
         checkEdited();
     },
+    updatepassword: (req, res) => {
+      const { email, newpassword } = req.body;
+      async function editProfile() {
+        try {
+            let preparedQuery = "update users set password = $1 where email = $2 RETURNING *";
+            let queryParams = [newpassword , email];
+
+            let result = await dbServices(preparedQuery, queryParams);
+            result = result[0];
+            //console.log(result);
+            res.status(200).send(successResponse("Password changed successfully", result));
+        } catch (e) {
+            res.status(406).send(errorResponse(e));
+        }
+
+    }
+    editProfile();
+    },
 
     updateProfile: (req, res) => {
         const { name, gender, country, email, password, userid, usercurrent: { currentName, currentEmail }, usertoken: { tokenName, tokenEmail } } = req.body;

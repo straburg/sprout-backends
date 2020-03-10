@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { signup, validateEmail, validateUsername, login, clearTestData, checkLastUpdate, updateProfile, test, verifyPassword, createToken, getUser, credit, getBankUser, sendEmail, sendEmailNotice } from "../controllers/userController";
-import { validateInputs, validateStrings, validateLoginInput, validateEmailInputs } from "../middleware/validateInputs"
+import { signup, validateEmail, validateUsername, login, clearTestData, checkLastUpdate, updateProfile, test, verifyPassword, createToken, getUser, credit, getBankUser, sendEmail, sendEmailNotice, updatepassword } from "../controllers/userController";
+import { validateInputs, validatePasswordInputs, validateStrings, validateLoginInput, validateEmailInputs } from "../middleware/validateInputs"
 import { validateUserParams,validateAmount } from "../middleware/validateParams";
 import { checkForToken, verifyToken } from "../middleware/verifyToken";
 const route = express.Router();
@@ -18,6 +18,7 @@ route.use(function(req, res, next) {
 });
 
 route.get("/test", test);
+route.post("/changepassword", validatePasswordInputs,login, verifyPassword, updatepassword )
 route.post("/signup", validateInputs, validateStrings, validateEmail, validateUsername, signup, sendEmail);
 route.post("/notify", validateEmailInputs, sendEmailNotice);
 route.patch("/update/profile", checkForToken, validateInputs, validateStrings, verifyToken, validateEmail, checkLastUpdate, updateProfile);

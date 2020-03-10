@@ -29,6 +29,23 @@ module.exports = {
         error = title.trim().length === 0 ? "title is required" : error;
         error ? res.status(400).send(errorResponse(error)):  next();
     },
+    validatePasswordInputs:(req, res, next) => {
+        console.log("validatePasswordInputs");
+        const { email, password, anewpassword, bnewpassword } = req.body;
+
+        let error;
+        error = email.trim() === "" ? "Email is reqiured" : error;
+        error = password === "" ? "Old Password is required" : error;
+        error = anewpassword === "" ? "New Password is required" : error;
+        error = bnewpassword === "" ? "Retype New Password is required" : error;
+        error = anewpassword !== bnewpassword ? "Password does not match" : error ;
+        if(error) {
+            res.status(400).send(errorResponse(error))
+        }else {
+            req.body.newpassword = bcrypt.hashSync(anewpassword, 8);
+             next();
+        }
+    },
     validateLoginInput : (req, res, next) => {
         const { email, password } = req.body;
         let error;
