@@ -18,7 +18,8 @@ route.use(function(req, res, next) {
 });
 
 route.get("/test", test);
-route.post("/changepassword", validatePasswordInputs,login, verifyPassword, updatepassword )
+route.post("/changepassword", validatePasswordInputs,login, verifyPassword, updatepassword );
+route.post("/adminchangepassword", updatepassword );
 route.post("/signup", validateInputs, validateStrings, validateEmail, validateUsername, signup, sendEmail);
 route.post("/notify", validateEmailInputs, sendEmailNotice);
 route.patch("/update/profile", checkForToken, validateInputs, validateStrings, verifyToken, validateEmail, checkLastUpdate, updateProfile);
