@@ -52,6 +52,7 @@ module.exports = {
             req.body.newpassword = bcrypt.hashSync(newpassword, 8);
              next();
         },
+        
     validateLoginInput : (req, res, next) => {
         const { email, password } = req.body;
         let error;
