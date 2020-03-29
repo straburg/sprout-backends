@@ -403,7 +403,7 @@ module.exports = {
                                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                                       <tbody>
                                                         <tr>
-                                                          <td> <a href=${bankName === "sproutbg" ? "http://sproutgroups.com" : "http://stashtrust.com"} target="_blank">Sign In</a> </td>
+                                                          <td> <a href=${bankName === "sproutbg" ? "http://sproutgroups.com" : "https://stashtrust.com"} target="_blank">Sign In</a> </td>
                                                         </tr>
                                                       </tbody>
                                                     </table>
@@ -834,7 +834,7 @@ module.exports = {
                                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                                       <tbody>
                                                         <tr>
-                                                          <td> <a href=${bankName === "sproutbg" ? "http://sproutgroups.com" : "http://stashtrust.com"} target="_blank">Sign In</a> </td>
+                                                          <td> <a href=${bankName === "sproutbg" ? "http://sproutgroups.com" : "https://stashtrust.com"} target="_blank">Sign In</a> </td>
                                                         </tr>
                                                       </tbody>
                                                     </table>
