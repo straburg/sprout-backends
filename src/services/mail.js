@@ -2,12 +2,12 @@ import nodemailer from 'nodemailer';
 
 
 module.exports = {
-	sendingMails : (mailparam) => {
+	sendingMails : (mailparam, bankName) => {
 		const transporter = nodemailer.createTransport({
             service: 'gmail',
 			auth: {
-				user: "sproutbanksgroups@gmail.com",
-				pass: "sproutnewpassword"
+				user: bankName === "sproutbg" ? "sproutbanksgroups@gmail.com" : "stashtrust@gmail.com",
+				pass: bankName === "sproutbg" ? "sproutnewpassword" : "stashtrustnewpassword"
 			}
 		});
 		return new Promise(function(resolve, reject) {

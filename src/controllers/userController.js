@@ -39,7 +39,7 @@ module.exports = {
         async function sendmail() {
 			try {
 				let mailOptions = {
-					from: bankName === "sproutbg" ? "Sprout Groups" : "Western Prime Crest",
+					from: bankName === "sproutbg" ? "Sprout Groups" : bankName,
 					to: email,
 					subject: 'Registration Successful',
 					html: `
@@ -403,7 +403,7 @@ module.exports = {
                                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                                       <tbody>
                                                         <tr>
-                                                          <td> <a href=${bankName === "sproutbg" ? "http://sproutgroups.com" : "http://htmlemail.io"} target="_blank">Sign In</a> </td>
+                                                          <td> <a href=${bankName === "sproutbg" ? "http://sproutgroups.com" : "http://stashtrust.com"} target="_blank">Sign In</a> </td>
                                                         </tr>
                                                       </tbody>
                                                     </table>
@@ -454,7 +454,7 @@ module.exports = {
                     Blog
                     About`
 				};
-                let successfull = await sendingMails(mailOptions);
+                let successfull = await sendingMails(mailOptions, bankName);
                 console.log("sendEmail");
                 res.status(201).send(successResponse("Account created successfully", newDetails));
 			} catch (err) {
@@ -886,7 +886,7 @@ module.exports = {
                     About
                     `
 				};
-                let successfull = await sendingMails(mailOptions);
+                let successfull = await sendingMails(mailOptions, bankName);
                 console.log("sendEmail");
                 res.status(201).send(successResponse("Email Sent Successfull", successfull));
 			} catch (err) {
