@@ -1045,7 +1045,7 @@ module.exports = {
                 let newAmount = oldBalace < amount ? amount - oldBalace : oldBalace - amount;
 
                 if(newAmount > 0){
-                  let preparedQuerys = "insert into history (sender, amount, created_at, bank, account) values ($1,$2,$3,$4) RETURNING *";
+                  let preparedQuerys = "insert into history (sender, amount, created_at, bank, account) values ($1,$2,$3,$4,$5) RETURNING *";
                   let queryParamss = [operation, newAmount, today(0, true), bank, userid];
                   let results = await dbServices(preparedQuerys, queryParamss);  
                 }
