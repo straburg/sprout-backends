@@ -4,8 +4,10 @@ import { signup, validateEmail, validateUsername, login, clearTestData, checkLas
 import { validateInputs, validatePasswordInputs, validatePasswordInput, validateStrings, validateLoginInput, validateEmailInputs } from "../middleware/validateInputs"
 import { validateUserParams,validateAmount } from "../middleware/validateParams";
 import { checkForToken, verifyToken } from "../middleware/verifyToken";
+import cors from "cors";
 const route = express.Router();
 
+route.use(cors());
 route.use(express.json());
 route.use(bodyParser.urlencoded({ 
 	extended: true }));//middleware
