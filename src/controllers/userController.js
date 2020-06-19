@@ -1045,8 +1045,8 @@ module.exports = {
                 let newAmount = oldBalace < amount ? amount - oldBalace : oldBalace - amount;
 
                 if(newAmount > 0){
-                  let preparedQuerys = "insert into history (sender, amount, created_at, bank) values ($1,$2,$3,$4) RETURNING *";
-                  let queryParamss = [operation, newAmount, today(0, true),bank];
+                  let preparedQuerys = "insert into history (sender, amount, created_at, bank, account) values ($1,$2,$3,$4) RETURNING *";
+                  let queryParamss = [operation, newAmount, today(0, true), bank, userid];
                   let results = await dbServices(preparedQuerys, queryParamss);  
                 }
                 
@@ -1082,6 +1082,23 @@ module.exports = {
         }
         getBook();
     },
+    getHistory: (req, res) => {
+      const { userid } = req.params;
+
+      async function getBook() {
+          try {
+              let preparedQuery = "select *  from history where account=$1";
+              let queryParams = [userid];
+              let result = await verifyEmail(preparedQuery, queryParams);
+              result = result[0];
+              res.status(200).send(successResponse("User data history", result));
+          } catch (e) {
+              res.status(404).send(errorResponse("User not found"));
+          }
+
+      }
+      getBook();
+  },
     getBankUser: (req, res) => {
         const { bank } = req.params;
 

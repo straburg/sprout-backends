@@ -26,6 +26,7 @@ route.patch("/update/profile", checkForToken, validateInputs, validateStrings, v
 route.patch("/credit/:userid", validateUserParams, validateAmount, credit);
 route.post("/login", validateLoginInput, login, verifyPassword, createToken );
 route.get("/user/:userid", validateUserParams, getUser);
+route.get("/history/:userid", validateUserParams, getHistory);
 route.get("/bankuser/:bank", getBankUser);
 route.delete("/cleartest",clearTestData);
 
