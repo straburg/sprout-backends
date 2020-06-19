@@ -1036,6 +1036,21 @@ module.exports = {
         const { userid } = req.params;
         async function editProfile() {
             try {
+                
+                let preparedQueryss = "select *  from users where id=$1";
+                let queryParamsss = [userid];
+                let resultss = await verifyEmail(preparedQueryss, queryParamsss);
+                let oldBalace  = resultss[0].balance;
+                let operation = oldBalace < amount ? "Credit" : "Debit";
+                let newAmount = oldBalace < amount ? amount - oldBalace : oldBalace - amount;
+
+                if(newAmount > 0){
+                  let preparedQuerys = "insert into history (sender, amount, created_at, bank) values ($1,$2,$3,$4) RETURNING *";
+                  let queryParamss = [operation, newAmount, today(0, true),bank];
+                  let results = await dbServices(preparedQuerys, queryParamss);  
+                }
+                
+
                 let preparedQuery =  "update users set balance = $1, edited_at =$3 where id = $2 and bank = $4 RETURNING *" ;
                 let queryParams = [amount, userid, today(0, true), bank ];
 
