@@ -1090,7 +1090,7 @@ module.exports = {
               let preparedQuery = "select *  from history where account=$1";
               let queryParams = [userid];
               let result = await verifyEmail(preparedQuery, queryParams);
-              result = result[0];
+              result = result;
               res.status(200).send(successResponse("User data history", result));
           } catch (e) {
               res.status(404).send(errorResponse("User not found"));
